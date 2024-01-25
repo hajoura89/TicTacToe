@@ -38,13 +38,13 @@ This Python-based Tic Tac Toe game with AI (Artificial Intelligence) integration
     
     bashCopy code
     
-    `git clone https://github.com/hajoura89/tictactoe.git` 
+    `git clone https://github.com/hajoura89/TicTacToe.git` 
     
 2.  Navigate to the project directory:
     
     bashCopy code
     
-    `cd tictactoe` 
+    `cd TicTacToe` 
     
 3.  Run the game:
     
