@@ -38,13 +38,13 @@ This Python-based Tic Tac Toe game with AI (Artificial Intelligence) integration
     
     bashCopy code
     
-    `git clone https://github.com/yourusername/tic-tac-toe-ai.git` 
+    `git clone https://github.com/hajoura89/tictactoe.git` 
     
 2.  Navigate to the project directory:
     
     bashCopy code
     
-    `cd tic-tac-toe-ai` 
+    `cd tictactoe` 
     
 3.  Run the game:
     
@@ -58,14 +58,14 @@ This Python-based Tic Tac Toe game with AI (Artificial Intelligence) integration
 ### Against the Computer
 
 1.  Launch the game.
-2.  Select the "1 player (AI)" option from the main menu.
+2.  Select the "Againt AI player" option from the main menu.
 3.  Choose whether you want to play as X (first) or O (second).
 4.  Enjoy the game and challenge the computer!
 
 ### Two-Player Mode
 
 1.  Launch the game.
-2.  Select the "2 players" option from the main menu.
+2.  Select the "Two players" option from the main menu.
 3.  Take turns with a friend to make moves on the board.
 4.  The game will automatically detect the winner or declare a draw.
 
@@ -73,11 +73,20 @@ This Python-based Tic Tac Toe game with AI (Artificial Intelligence) integration
 
 The code is organized into a single Python file, `tictactoe.py`, with a class-based structure. Here's a brief overview of key components:
 
--   **TicTacToe Class:** Manages the menus and game functionality.
+-   **MyApp Class:** Manages the menus and game functionality.
+-   **MainMenu():** Method that opens the main window of the program.
 -   **checkWinner():** Determines the winner or if the game is a draw.
 -   **makeMove():** Handles player moves and updates the game state.
+-   **onePlayer():** Displays the menu with options for the user's game against the computer.
+-   **startOnePlayerGame():** Starts the game against the computer
 -   **aiMove():** Implements the AI's move using the minimax algorithm.
--   ...
+-   **minimax():** Algorithm for calculating the score from the perspective of the computer or the user.
+-   **scorePosition():** To find the optimal move.
+-   **twoPlayers():** Initiates a game between two players.
+-   **createGame():** Initializes game values.
+-   **clearWindow():** Announces the winner of the game in the label created earlier.
+-   **announceWinner():** Clears all elements from the Tkinter window.
+-   **exit():** Exit the Game.
 
 ## Contributing
 
