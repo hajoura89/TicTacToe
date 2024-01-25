@@ -1,39 +1,60 @@
+from customtkinter import *
 import random
-import tkinter as tk
-from tkinter import messagebox
+from PIL import Image
 
-class TicTacToe():
+class MyApp(CTk):
     # The class that manages the program's menus and game functionality
-    def __init__(self, root):
-        self.w = root
-        self.w.title("TicTacToe Game")  # Game title as TicTacToe Game
-        self.w.geometry("500x500")  # Size of the game window
-        self.w.resizable(0, 0)  # Disallow window resizing by the user
-        self.w.configure(bg='blue')  # Window background color
-        self.font_large = "Helvetica 40"  # Helvetica font with word size 40 for the menu
-        self.font_small = "Helvetica 35"  # Helvetica font with word size 35 for the game result
-        self.button_style = {"font": self.font_large, "bg": "#FFD580", "activebackground": "#FFD580", "bd": 0, "relief": "flat"}
-        # Dictionary with parameters on how user-pressed buttons are displayed
-        self.label_style = {"bg": "#A64C62", "fg": "white", "font": self.font_large}
-        # Dictionary with parameters on how the game title is displayed before announcing the winner
-        self.win_label_initial = {"bg": "blue", "fg": "white", "font": self.font_small}
-        # Dictionary with parameters on how the game title is displayed after announcing the winner
-        self.win_label_final = {"bg": "#A64C62"}
-        # Initially, add the element to the window that will announce the winner.
-        # Initially, before announcing, it has the same color as the background to be invisible,
-        # then we change the background color to reveal the text.
+    def __init__(self):
+        super().__init__()
+        self.geometry("500x500") # Size of the game window
+        self.title("Tic Tac Toe Game") # Window title
         self.mainMenu() # Open the main menu
 
     def mainMenu(self):
         # Method that opens the main window of the program
         # Displays the title of the game and options for the user to play either against another user or against the computer,
         # or to exit
-        self.clearWindow()
-        tk.Label(self.w, text="TicTacToe", **self.label_style).pack(expand=1, fill="both", padx=10, pady=10)
-        tk.Button(self.w, text="1 player (AI)", command=self.onePlayer, **self.button_style).pack(expand=1, fill="both", padx=10, pady=10)
-        tk.Button(self.w, text="2 players", command=self.twoPlayers, **self.button_style).pack(expand=1, fill="both", padx=10, pady=10)
-        tk.Button(self.w, text="Exit", command=self.exit, **self.button_style).pack(expand=1, fill="both", padx=10, pady=10)
+        
+        # Clear the window 
+        self.clearWindow() 
+        
+        # Create a new frame for the main menu
+        
+        frame = CTkFrame(master=self, fg_color="#4EAC7D", border_color="#FFCC70", border_width=2, width=200, height=50)
+        frame.grid(row=1, column=1, sticky="nsew")
 
+        # Add title label and buttons for game options
+        label = CTkLabel(master=frame, text="Tic Tac Toe", font=("Arial Bold", 20), justify="left")
+        label.pack(anchor="s", expand=True, pady=(30, 15), padx=30)
+
+        onePlayerbtn = CTkButton(master=frame, text="Against AI Player",command=self.onePlayer)
+        onePlayerbtn.pack(anchor="s", expand=True, fill="both", pady=(30, 15), padx=30)
+
+        twoPlayersbtn = CTkButton(master=frame, text="Two Players", command=self.twoPlayers)
+        twoPlayersbtn.pack(anchor="s", expand=True, fill="both", pady=(30, 15), padx=30)
+
+        # Add an Exit button with an image
+        img = Image.open("exiticon.png")    
+        btn = CTkButton(master=frame, text="Exit",command=self.exit, corner_radius=32, fg_color="#4158D0", 
+                hover_color="#CD8C67", border_color="#CD8C67", 
+                border_width=2, image=CTkImage(dark_image=img, light_image=img))
+        btn.pack(anchor="s", expand=True, fill="both", pady=(30, 15), padx=30)
+
+        # Set fonts and styles
+        self.font_large = ("Arial", 16)
+        self.font_small = ("Arial", 12)
+        self.label_style = {"bg": "#A64C62", "fg": "white", "font": self.font_large}
+        self.win_label_initial = {"bg": "blue", "fg": "white", "font": self.font_small}
+        self.win_label_final = {"bg": "#A64C62"}
+
+        # Configure row and column weights to make the frame expand with the window
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+        frame.grid_rowconfigure(1, weight=1)
+        frame.grid_columnconfigure(1, weight=1)
+
+
+  
     # Returns the following numbers depending on the result of the ongoing game:
     # 0 -> no winning party, so the game continues
     # 1 -> the player with the character X wins
@@ -79,7 +100,7 @@ class TicTacToe():
             else:
                 new_text = "O"
             # Change the text of the button corresponding to the respective cell in the game (in tkinter) to X or O
-            self.buttons[posX][posY].config(text=new_text)
+            self.buttons[posX][posY].configure(text=new_text)
             winner = self.checkWinner()
             # Check if there is a win or a draw after the respective move
             if winner == 0:  # If not, change the turn to the other player (from O to play X and vice versa)
@@ -97,11 +118,29 @@ class TicTacToe():
     # Choose your side corresponding to Play as X (first) or Play as O (second) or Return to the main menu
     def onePlayer(self):
         self.clearWindow()
-        tk.Label(self.w, text="Choose your side", **self.label_style).pack(expand=1, fill="both", padx=10, pady=10)
-        tk.Button(self.w, text="Play as X (first)", command=lambda: self.startOnePlayerGame(True), **self.button_style).pack(expand=1, fill="both", padx=10, pady=10)
-        tk.Button(self.w, text="Play as O (second)", command=lambda: self.startOnePlayerGame(False), **self.button_style).pack(expand=1, fill="both", padx=10, pady=10)
-        tk.Button(self.w, text="Return to the main menu", command=self.mainMenu, **self.button_style).pack(expand=1, fill="both", padx=10, pady=10)
+        # Create a new frame and configure its appearance
+        new_frame = CTkFrame(master=self, fg_color="#4EAC7D", border_color="#FFCC70", border_width=2)
+        new_frame.grid(row=1, column=1, sticky="nsew")  # Use sticky to make the frame expand in all directions
 
+        # Add new widgets to the new frame
+        label = CTkLabel(master=new_frame, text="Choose your side", font=("Arial Bold", 20), justify="left")
+        label.pack(anchor="s", expand=True, pady=(30, 15), padx=30)
+
+        checkbox_x = CTkCheckBox(master=new_frame, text="X (First)", border_color="#ffffff", fg_color="#ffffff", checkmark_color="#CD8C67")
+        checkbox_x.pack(expand=True, pady=20)
+        checkbox_x.bind("<Button-1>", lambda event=None: self.startOnePlayerGame(True))
+
+        checkbox_o = CTkCheckBox(master=new_frame, text="O (Second)", border_color="#ffffff", fg_color="#ffffff", checkmark_color="#CD8C67", command=lambda: self.startOnePlayerGame(False))
+        checkbox_o.pack(expand=True, pady=20)
+        checkbox_o.bind("<Button-1>", lambda event=None: self.startOnePlayerGame(False))
+
+        img = Image.open("goback.png")    
+        btn = CTkButton(master=new_frame, text="Return To Main Page", command=self.mainMenu, corner_radius=32, fg_color="#4158D0", 
+                        hover_color="#CD8C67", border_color="#CD8C67", 
+                        border_width=2, image=CTkImage(dark_image=img, light_image=img))
+        btn.pack(anchor="s", expand=True, fill="both", pady=(30, 15), padx=30)
+   
+        
     # Starts the game against the computer
     def startOnePlayerGame(self, playerFirst):
         self.createGame()  # Initializes game variables
@@ -188,7 +227,7 @@ class TicTacToe():
     def twoPlayers(self):
         self.createGame()
         self.isOnePlayer = False
-
+ 
     # Method that initializes game values
     def createGame(self):
         # The turn of the player currently playing
@@ -211,20 +250,28 @@ class TicTacToe():
         # Creates the empty buttons using Tkinter
         for i in range(3):
             for j in range(3):
-                button = tk.Button(self.w, text=" ", command=lambda i=i, j=j: self.makeMove(i, j), **self.button_style)
+                button = CTkButton(master=self, text=" ",command=lambda i=i, j=j: self.makeMove(i, j),fg_color="#4158D0")
                 button.grid(row=i, column=j, sticky="nsew", padx=5, pady=5)
-                button.config(width=4, height=2)
-                self.w.grid_rowconfigure(i, weight=1)
-                self.w.grid_columnconfigure(j, weight=1)
+                button.configure(width=4, height=2)
+                self.grid_rowconfigure(i, weight=1)
+                self.grid_columnconfigure(j, weight=1)
                 self.buttons[i][j] = button
 
-        # Creates an invisible label that will announce the result of the game later
-        self.winner_announcement = tk.Label(self.w, text="", **self.win_label_initial)
+        
+        # Use CTkLabel without 'bg' and 'fg'
+        self.label_style = {"bg": "#A64C62", "fg": "white", "font": self.font_large}
+        self.win_label_initial = {"bg": "blue", "fg": "white", "font": self.font_small}
+        self.win_label_final = {"bg": "#A64C62"}
+        self.winner_announcement = CTkLabel(self, text="", font=self.font_small)
         self.winner_announcement.grid(row=3, column=0, columnspan=3, sticky="nsew", padx=10, pady=10)
 
         # Creates the button to return to the main menu
-        self.return_button = tk.Button(self.w, text="Return to the main menu", command=self.mainMenu, **self.button_style)
+        img = Image.open("goback.png")   
+        self.return_button = CTkButton(master=self, text="Return To Main Page", command=self.mainMenu, corner_radius=12, fg_color="#4158D0", 
+                        hover_color="#CD8C67", border_color="#CD8C67", 
+                        border_width=2, image=CTkImage(dark_image=img, light_image=img))
         self.return_button.grid(row=4, column=0, columnspan=3, sticky="nsew", padx=10, pady=10)
+
 
     # Announces the winner of the game in the label created earlier
     def announceWinner(self, winner):
@@ -236,24 +283,22 @@ class TicTacToe():
             winner_text = "It's a draw!"
 
         # Makes the label not invisible
-        self.winner_announcement.config(self.win_label_final)
+        self.winner_announcement.configure(self.win_label_final)
         # Changes the text of the label
-        self.winner_announcement.config(text=winner_text)
+        self.winner_announcement.configure(text=winner_text)
 
     # Clears all elements from the Tkinter window
     def clearWindow(self):
-        for widget in self.w.winfo_children():
+        self.geometry("500x500")
+        for widget in self.winfo_children():
             widget.destroy()
 
     # Closes the program
     def exit(self):
-        self.w.destroy()
+        self.destroy()
+        
 
-# Launches the Tkinter window to start the program
-def launchWindow():
-    root = tk.Tk()
-    TicTacToe(root)
-    root.mainloop()
+if __name__ == "__main__":
+    app = MyApp()
+    app.mainloop()
 
-# Calls the launchWindow method to start the program
-launchWindow()
