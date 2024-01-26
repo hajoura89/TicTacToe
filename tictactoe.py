@@ -34,7 +34,7 @@ class MyApp(CTk):
         twoPlayersbtn.pack(anchor="s", expand=True, fill="both", pady=(30, 15), padx=30)
 
         # Add an Exit button with an image
-        img = Image.open("exiticon.png")    
+        img = Image.open("./icons/exiticon.png")    
         btn = CTkButton(master=frame, text="Exit",command=self.exit, corner_radius=32, fg_color="#4158D0", 
                 hover_color="#CD8C67", border_color="#CD8C67", 
                 border_width=2, image=CTkImage(dark_image=img, light_image=img))
@@ -266,7 +266,7 @@ class MyApp(CTk):
         self.winner_announcement.grid(row=3, column=0, columnspan=3, sticky="nsew", padx=10, pady=10)
 
         # Creates the button to return to the main menu
-        img = Image.open("goback.png")   
+        img = Image.open("./icons/goback.png")   
         self.return_button = CTkButton(master=self, text="Return To Main Page", command=self.mainMenu, corner_radius=12, fg_color="#4158D0", 
                         hover_color="#CD8C67", border_color="#CD8C67", 
                         border_width=2, image=CTkImage(dark_image=img, light_image=img))
@@ -301,4 +301,3 @@ class MyApp(CTk):
 if __name__ == "__main__":
     app = MyApp()
     app.mainloop()
-
