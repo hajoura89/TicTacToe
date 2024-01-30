@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ('/root/TicTacToe/build/tictactoe/PYZ-00.pyz',
+=======
+('/root/TTc/TicTacToe/build/tictactoe/PYZ-00.pyz',
+>>>>>>> 506680f40b38238d4d60147546bf1946aa713ff8
  [('PIL', '/usr/local/lib/python3.8/dist-packages/PIL/__init__.py', 'PYMODULE'),
   ('PIL.BlpImagePlugin',
    '/usr/local/lib/python3.8/dist-packages/PIL/BlpImagePlugin.py',
