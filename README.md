@@ -27,7 +27,7 @@ This Python-based Tic Tac Toe game with AI (Artificial Intelligence) integration
 
 ## Getting Started
 
-### Install Dependencies:
+### Dependencies:
 
 -   pip3 install pillow
 -   pip3 install customtkinter
