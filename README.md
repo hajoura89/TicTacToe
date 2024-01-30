@@ -27,30 +27,20 @@ This Python-based Tic Tac Toe game with AI (Artificial Intelligence) integration
 
 ## Getting Started
 
-### Prerequisites
+### Install Dependencies:
 
--   Python 3.x
--   Tkinter library (usually included with Python installations)
+-   pip3 install pillow
+-   pip3 install customtkinter
+-   pip install pyinstaller
 
-### Installation
+### Play The Game
 
-1.  Clone the repository:
-    
-    bashCopy code
-    
-    `git clone https://github.com/hajoura89/TicTacToe.git` 
-    
-2.  Navigate to the project directory:
-    
-    bashCopy code
-    
-    `cd TicTacToe` 
-    
-3.  Run the game:
-    
-    bashCopy code
-    
-    `python tictactoe.py` 
+To play Tic Tac Toe game, follow these steps:
+
+-   Click on the "Code" button, and a dropdown menu will appear.
+-   Select the option "Download ZIP."
+-   This action will prompt your browser to download a compressed ZIP archive of the entire repository.
+-   Double click the launcher file to open the game (located in dist folder)
     
 
 ## How to Play
